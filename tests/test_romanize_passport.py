@@ -9,6 +9,7 @@ NAMES = [(u'なんば', 'NAMBA'),
          (u'ほっち', 'HOTCHI'),
          (u'ひゅうが', 'HYUGA'),
          (u'ちゅうま', 'CHUMA'),
+         (u'えっちゅう', 'ETCHU'),
          (u'チュウマ', 'CHUMA'),
          ]
 
