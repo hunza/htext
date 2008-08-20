@@ -168,7 +168,6 @@ def romanize(value, long_vowels_h=False):
         elif char == u"ー":
             ## 3. 長音 ヘボン式では長音を表記しない
             hepburn = ""
-            print char, "long vowl"
 
         #if 0:
         #    ## Japanese Passport table doesn't have entries for ぁ-ぉ
@@ -185,7 +184,6 @@ def romanize(value, long_vowels_h=False):
                     hepburn = ''
 
                 if h_test in ('OO', 'OU'):
-                    print last_hepburn, hepburn
                     hepburn = long_vowels_h and 'H' or ''
 
             output.append(hepburn)
