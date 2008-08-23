@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from textutil_ja.romanize.passport import romanize
+from textutil_ja.romanize.passport import romanize, reverse
 
 NAMES = [(u'なんば', 'NAMBA'),
          (u'ほんま', 'HOMMA'),
@@ -36,3 +36,16 @@ def test_hepburn_vowels():
                          (u'おーの', 'ONO'),
                          ]:
         yield func, i, e
+
+def test_reverse():
+    def func(input, expected):
+        try:
+            value = reverse(input)
+            assert value == expected, u'%s expected, got %s' % (expected, value)
+        except NotImplementedError:
+            # TODO
+            pass
+
+    for e, i in NAMES:
+        yield func, i, e
+

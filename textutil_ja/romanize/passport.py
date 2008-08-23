@@ -4,6 +4,8 @@ Hepburn Romanization using Japanese passport rules
 """
 from textutil_ja import kana
 
+__all__ = ['romanize', 'reverse']
+
 _MAP = (
     "あ", "A",
     "い", "I",
@@ -197,3 +199,6 @@ def romanize(value, long_vowels_h=False):
         index += len(char)
 
     return ''.join(output)
+
+def reverse(value):
+    raise NotImplementedError()
