@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 from textutil_ja import kana
 
 DATA = [
     (u"コーリャ", u"こーりゃ"),
-    (u"ペレズヴォン", u"ぺれずぼん"),
     (u"アレクセイ・カラマーゾフ", u"あれくせい・からまーぞふ"),
     ]
 
@@ -29,26 +32,35 @@ def test_invalid():
     for input in (u"酒", u"\u2200"):
         yield func, input, input
 
-def test_katakana_to_hiragana():
+def test_to_hiragana():
     def func(input, expected):
         output = kana.to_hiragana(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
-    for i, e in DATA:
+    for i, e in DATA + [(u"ドウモト", u"どうもと"),
+                        (u"ヴァスティッチ", u"ばすてぃっち"),
+                        (u"イブラヒモヴィッチ", u"いぶらひもびっち"),
+                        (u"ヴェンゲル", u"べんげる"),
+                        (u"クリエイティヴ", u"くりえいてぃぶ"),
+                        ]:
         yield func, i, e
 
-def test_hiragana_to_katakana():
+def test_to_katakana():
     def func(input, expected):
         output = kana.to_katakana(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
-    for e, i in DATA + [(u"アカァキー・アカァキヴィッチ", u"あかぁきー・あかぁきびっち")]:
+    for e, i in DATA + [(u"ドウモト", u"どうもと"),
+                        (u"バスティッチ", u"ばすてぃっち"),
+                        (u"イブラヒモビッチ", u"いぶらひもびっち"),
+                        (u"ベンゲル", u"べんげる"),
+                        ]:
         yield func, i, e
 
 def test_hiragana_to_katakana_unchanged():
     def func(input, expected):
         output = kana.to_katakana(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
     for e, i in DATA:
         yield func, e, e
@@ -56,7 +68,7 @@ def test_hiragana_to_katakana_unchanged():
 def test_katakana_to_hiragana_unchanged():
     def func(input, expected):
         output = kana.to_hiragana(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
     for e, i in DATA:
         yield func, i, i
@@ -71,7 +83,7 @@ def test_mixed():
 def test_row():
     def func(input, expected):
         output = kana.get_kana_row(input)
-        assert output == expected, "%r expected, got %r" % (expected, output)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
     for input, expected in ((u"アリョーシャ", u"あ"),
                             (u"コーリャ", u"か"),

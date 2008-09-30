@@ -11,6 +11,10 @@ def to_katakana(value):
 def to_hiragana(value):
     if not isinstance(value, unicode):
         value = unicode(value)
+
+    for kata, hira in KATAKANA_TO_HIRAGANA_EXCEPTIONS:
+        value = value.replace(kata, hira)
+
     return value.translate(KATAKANA_TO_HIRAGANA)
 
 def to_zen(value):
@@ -62,7 +66,13 @@ HIRAGANA_TO_KATAKANA = dict((k, v) for k, v in zip(range(ord(u"ぁ"), ord(u"ん"
 KATAKANA_TO_HIRAGANA = dict((v, k) for k, v in HIRAGANA_TO_KATAKANA.items())
 
 # special rules
-KATAKANA_TO_HIRAGANA.update((ord(k), ord(v)) for k, v in [(u"ヴ", u"び")])
+KATAKANA_TO_HIRAGANA_EXCEPTIONS = [
+    (u"ヴァ", u"ば"),
+    (u"ヴィ", u"び"),
+    (u"ヴェ", u"べ"),
+    (u"ヴォ", u"ぼ"),
+    (u"ヴ",   u"ブ"),
+]
 
 KATAKANA_LIST = (
     (u'ァ', u'ｧ'),
