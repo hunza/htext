@@ -19,6 +19,7 @@ Programming Language :: Python
       author_email='csakatoku@gmail.com',
       url='http://code.google.com/p/textutil_ja/',
       license='MIT License',
+      platforms=['any'],
       packages=find_packages(exclude=['ez_setup', 'tests']),
       include_package_data=True,
       zip_safe=False,
