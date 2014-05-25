@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import re
-from textutil_ja import kana
+from htext.ja import kana
 
 __all__ = ['romanize', 'reverse']
 

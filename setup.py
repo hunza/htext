@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.1.1'
+version = '0.2.0'
 
-setup(name='textutil_ja',
+setup(name='htext',
       version=version,
-      description="textutil_ja - helpers for handling japanese text",
+      description="htext.ja - helpers for handling japanese text",
       long_description="""\
-textutil_ja is helper library for handling japanese text.
+htext.ja is helper library for handling japanese text.
 """,
       classifiers=filter(None, map(str.strip, """\
 Development Status :: 3 - Alpha
@@ -15,9 +15,9 @@ License :: OSI Approved :: MIT License
 Programming Language :: Python
 """.splitlines())),
       keywords='',
-      author='Chihio Sakatoku',
+      author='Chihio SAKATOKU',
       author_email='csakatoku@gmail.com',
-      url='http://code.google.com/p/textutil_ja/',
+      url='https://github.com/hunza/htext',
       license='MIT License',
       platforms=['any'],
       packages=find_packages(exclude=['ez_setup', 'tests']),

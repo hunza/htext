@@ -2,7 +2,7 @@
 """
 Hepburn Romanization using Japanese passport rules
 """
-from textutil_ja import kana
+from htext.ja import kana
 
 __all__ = ['romanize', 'reverse']
 

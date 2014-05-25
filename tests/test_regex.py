@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from textutil_ja import regex
+from htext.ja import regex
 
 def test_hiragana():
     res = regex.hiragana.findall(u"カラマーゾフのきょうだい")

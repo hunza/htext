@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from textutil_ja.romanize.hepburn import romanize, reverse
+from htext.ja.romanize.hepburn import romanize, reverse
 
 def test_romanize():
     def func(input, expected):

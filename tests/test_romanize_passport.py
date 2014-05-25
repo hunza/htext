@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from textutil_ja.romanize.passport import romanize, reverse
+from htext.ja.romanize.passport import romanize, reverse
 
 NAMES = [(u'なんば', 'NAMBA'),
          (u'ほんま', 'HOMMA'),

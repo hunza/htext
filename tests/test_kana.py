@@ -3,7 +3,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf8')
 
-from textutil_ja import kana
+from htext.ja import kana
 
 DATA = [
     (u"コーリャ", u"こーりゃ"),
