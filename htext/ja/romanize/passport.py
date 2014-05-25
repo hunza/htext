@@ -2,6 +2,7 @@
 """
 Hepburn Romanization using Japanese passport rules
 """
+from __future__ import unicode_literals
 from htext.ja import kana
 
 __all__ = ['romanize', 'reverse']
@@ -120,7 +121,7 @@ _MAP = (
     "ぴゅ", "PYU",
     "ぴょ", "PYO",
 )
-MAP = dict((unicode(k, 'utf8'), v) for k, v in zip(_MAP[0::2], _MAP[1::2]))
+MAP = dict((k, v) for k, v in zip(_MAP[0::2], _MAP[1::2]))
 
 def _hepburn_for(value, index):
     char = None

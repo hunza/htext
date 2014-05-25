@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import unicodedata
+import six
 
 __all__ = ['to_katakana', 'to_hiragana', 'to_han', 'to_zen', 'get_kana_row']
 
+def force_text(value):
+    if isinstance(value, six.text_type):
+        return value
+    elif isinstance(value, six.string_types):
+        return six.b(value).decode()
+    else:
+        value = str(value)
+        return value if isinstance(value, six.text_type) else value.decode()
+
 def to_katakana(value):
-    if not isinstance(value, unicode):
-        value = unicode(value)
-    return value.translate(HIRAGANA_TO_KATAKANA)
+    return force_text(value).translate(HIRAGANA_TO_KATAKANA)
 
 def to_hiragana(value):
-    if not isinstance(value, unicode):
-        value = unicode(value)
+    value = force_text(value)
 
     for kata, hira in KATAKANA_TO_HIRAGANA_EXCEPTIONS:
         value = value.replace(kata, hira)
@@ -21,16 +29,14 @@ def to_zen(value):
     """
     Convert hankaku-katakana to zenkaku katakana
     """
-    if not isinstance(value, unicode):
-        value = unicode(value)
+    value = force_text(value)
     return unicodedata.normalize('NFKC', value)
 
 def to_han(value):
     """
     Convert zenkaku-katakana to hankaku katakana
     """
-    if not isinstance(value, unicode):
-        value = unicode(value)
+    value = force_text(value)
     return value.translate(ZEN_TO_HAN_TABLE)
 
 def _get_kana_row():
@@ -53,8 +59,7 @@ def _get_kana_row():
             table[char] = v
 
     def get_kana_row(value):
-        if not isinstance(value, unicode):
-            value = unicode(value)
+        value = force_text(value)
         char = to_katakana(value[0])
         return table.get(char)
     return get_kana_row
@@ -75,93 +80,92 @@ KATAKANA_TO_HIRAGANA_EXCEPTIONS = [
 ]
 
 KATAKANA_LIST = (
-    (u'ァ', u'ｧ'),
-    (u'ア', u'ｱ'),
-    (u'ィ', u'ｨ'),
-    (u'イ', u'ｲ'),
-    (u'ゥ', u'ｩ'),
-    (u'ウ', u'ｳ'),
-    (u'ェ', u'ｪ'),
-    (u'エ', u'ｴ'),
-    (u'ォ', u'ｫ'),
-    (u'オ', u'ｵ'),
-    (u'カ', u'ｶ'),
-    (u'ガ', u'ｶﾞ'),
-    (u'キ', u'ｷ'),
-    (u'ギ', u'ｷﾞ'),
-    (u'ク', u'ｸ'),
-    (u'グ', u'ｸﾞ'),
-    (u'ケ', u'ｹ'),
-    (u'ゲ', u'ｹﾞ'),
-    (u'コ', u'ｺ'),
-    (u'ゴ', u'ｺﾞ'),
-    (u'サ', u'ｻ'),
-    (u'ザ', u'ｻﾞ'),
-    (u'シ', u'ｼ'),
-    (u'ジ', u'ｼﾞ'),
-    (u'ス', u'ｽ'),
-    (u'ズ', u'ｽﾞ'),
-    (u'セ', u'ｾ'),
-    (u'ゼ', u'ｾﾞ'),
-    (u'ソ', u'ｿ'),
-    (u'ゾ', u'ｿﾞ'),
-    (u'タ', u'ﾀ'),
-    (u'ダ', u'ﾀﾞ'),
-    (u'チ', u'ﾁ'),
-    (u'ヂ', u'ﾁﾞ'),
-    (u'ッ', u'ｯ'),
-    (u'ツ', u'ﾂ'),
-    (u'ヅ', u'ﾂﾞ'),
-    (u'テ', u'ﾃ'),
-    (u'デ', u'ﾃﾞ'),
-    (u'ト', u'ﾄ'),
-    (u'ド', u'ﾄﾞ'),
-    (u'ナ', u'ﾅ'),
-    (u'ニ', u'ﾆ'),
-    (u'ヌ', u'ﾇ'),
-    (u'ネ', u'ﾈ'),
-    (u'ノ', u'ﾉ'),
-    (u'ハ', u'ﾊ'),
-    (u'バ', u'ﾊﾞ'),
-    (u'パ', u'ﾊﾟ'),
-    (u'ヒ', u'ﾋ'),
-    (u'ビ', u'ﾋﾞ'),
-    (u'ピ', u'ﾋﾟ'),
-    (u'フ', u'ﾌ'),
-    (u'ブ', u'ﾌﾞ'),
-    (u'プ', u'ﾌﾟ'),
-    (u'ヘ', u'ﾍ'),
-    (u'ベ', u'ﾍﾞ'),
-    (u'ペ', u'ﾍﾟ'),
-    (u'ホ', u'ﾎ'),
-    (u'ボ', u'ﾎﾞ'),
-    (u'ポ', u'ﾎﾟ'),
-    (u'マ', u'ﾏ'),
-    (u'ミ', u'ﾐ'),
-    (u'ム', u'ﾑ'),
-    (u'メ', u'ﾒ'),
-    (u'モ', u'ﾓ'),
-    (u'ャ', u'ｬ'),
-    (u'ヤ', u'ﾔ'),
-    (u'ュ', u'ｭ'),
-    (u'ユ', u'ﾕ'),
-    (u'ョ', u'ｮ'),
-    (u'ヨ', u'ﾖ'),
-    (u'ラ', u'ﾗ'),
-    (u'リ', u'ﾘ'),
-    (u'ル', u'ﾙ'),
-    (u'レ', u'ﾚ'),
-    (u'ロ', u'ﾛ'),
-    (u'ヮ', u'ﾜ'),
-    (u'ワ', u'ﾜ'),
-    (u'ヲ', u'ｦ'),
-    (u'ン', u'ﾝ'),
-    (u'ー', u'ｰ'),
-    (u'、', u'､'),
-    (u'。', u'｡'),
-    (u'・', u'･'),
+    ('ァ', 'ｧ'),
+    ('ア', 'ｱ'),
+    ('ィ', 'ｨ'),
+    ('イ', 'ｲ'),
+    ('ゥ', 'ｩ'),
+    ('ウ', 'ｳ'),
+    ('ェ', 'ｪ'),
+    ('エ', 'ｴ'),
+    ('ォ', 'ｫ'),
+    ('オ', 'ｵ'),
+    ('カ', 'ｶ'),
+    ('ガ', 'ｶﾞ'),
+    ('キ', 'ｷ'),
+    ('ギ', 'ｷﾞ'),
+    ('ク', 'ｸ'),
+    ('グ', 'ｸﾞ'),
+    ('ケ', 'ｹ'),
+    ('ゲ', 'ｹﾞ'),
+    ('コ', 'ｺ'),
+    ('ゴ', 'ｺﾞ'),
+    ('サ', 'ｻ'),
+    ('ザ', 'ｻﾞ'),
+    ('シ', 'ｼ'),
+    ('ジ', 'ｼﾞ'),
+    ('ス', 'ｽ'),
+    ('ズ', 'ｽﾞ'),
+    ('セ', 'ｾ'),
+    ('ゼ', 'ｾﾞ'),
+    ('ソ', 'ｿ'),
+    ('ゾ', 'ｿﾞ'),
+    ('タ', 'ﾀ'),
+    ('ダ', 'ﾀﾞ'),
+    ('チ', 'ﾁ'),
+    ('ヂ', 'ﾁﾞ'),
+    ('ッ', 'ｯ'),
+    ('ツ', 'ﾂ'),
+    ('ヅ', 'ﾂﾞ'),
+    ('テ', 'ﾃ'),
+    ('デ', 'ﾃﾞ'),
+    ('ト', 'ﾄ'),
+    ('ド', 'ﾄﾞ'),
+    ('ナ', 'ﾅ'),
+    ('ニ', 'ﾆ'),
+    ('ヌ', 'ﾇ'),
+    ('ネ', 'ﾈ'),
+    ('ノ', 'ﾉ'),
+    ('ハ', 'ﾊ'),
+    ('バ', 'ﾊﾞ'),
+    ('パ', 'ﾊﾟ'),
+    ('ヒ', 'ﾋ'),
+    ('ビ', 'ﾋﾞ'),
+    ('ピ', 'ﾋﾟ'),
+    ('フ', 'ﾌ'),
+    ('ブ', 'ﾌﾞ'),
+    ('プ', 'ﾌﾟ'),
+    ('ヘ', 'ﾍ'),
+    ('ベ', 'ﾍﾞ'),
+    ('ペ', 'ﾍﾟ'),
+    ('ホ', 'ﾎ'),
+    ('ボ', 'ﾎﾞ'),
+    ('ポ', 'ﾎﾟ'),
+    ('マ', 'ﾏ'),
+    ('ミ', 'ﾐ'),
+    ('ム', 'ﾑ'),
+    ('メ', 'ﾒ'),
+    ('モ', 'ﾓ'),
+    ('ャ', 'ｬ'),
+    ('ヤ', 'ﾔ'),
+    ('ュ', 'ｭ'),
+    ('ユ', 'ﾕ'),
+    ('ョ', 'ｮ'),
+    ('ヨ', 'ﾖ'),
+    ('ラ', 'ﾗ'),
+    ('リ', 'ﾘ'),
+    ('ル', 'ﾙ'),
+    ('レ', 'ﾚ'),
+    ('ロ', 'ﾛ'),
+    ('ヮ', 'ﾜ'),
+    ('ワ', 'ﾜ'),
+    ('ヲ', 'ｦ'),
+    ('ン', 'ﾝ'),
+    ('ー', 'ｰ'),
+    ('、', '､'),
+    ('。', '｡'),
+    ('・', '･'),
 )
 
 ZEN_TO_HAN_TABLE = dict((ord(z), h) for z, h in KATAKANA_LIST)
 HAN_TO_ZEN_TABLE = dict((h, z) for z, h in KATAKANA_LIST)
-

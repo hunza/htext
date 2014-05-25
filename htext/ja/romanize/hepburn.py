@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import re
 from htext.ja import kana
 
@@ -15,13 +17,13 @@ def romanize(value):
     ## ッta -> tta
     def step2(matcher):
         char = matcher.group(1)
-        return u'%s%s' % (char, char)
+        return '%s%s' % (char, char)
     value = RE_CONSONANTS.sub(step2, value)
 
     ## oー -> oo
     def step3(matcher):
         vowel = matcher.group(1)
-        return u'%s%s' % (vowel, vowel)
+        return '%s%s' % (vowel, vowel)
     value = RE_VOWELS.sub(step3, value)
 
     return value
@@ -31,7 +33,7 @@ def reverse(value):
 
     ## step 1; tta -> ッta
     def step1(matcher):
-        return u"ッ%s" % matcher.group(1)
+        return "ッ%s" % matcher.group(1)
     value = RE_CONSONANTS_REVERSE.sub(step1, value)
 
     ##
@@ -43,12 +45,12 @@ def reverse(value):
 
     ## step 3
     def step3(matcher):
-        return u'%sン' % matcher.group(1)
+        return '%sン' % matcher.group(1)
     value = RE_N.sub(step3, value)
 
     return kana.to_hiragana(value)
 
-_KANA_TO_ROMAJI_MAP = u"""
+_KANA_TO_ROMAJI_MAP = """
   ア   a       イ   i       ウ   u       エ   e       オ   o
   ァ   xa      ィ   xi      ゥ   xu      ェ   xe      ォ   xo
   カ   ka      キ   ki      ク   ku      ケ   ke      コ   ko
@@ -82,7 +84,7 @@ _KANA_TO_ROMAJI_MAP = u"""
   ン   n
 """.split()
 
-_ROMAJI_TO_KANA_MAP = u"""  a    ア      i    イ      u    ウ      e    エ      o    オ
+_ROMAJI_TO_KANA_MAP = """  a    ア      i    イ      u    ウ      e    エ      o    オ
   xa   ァ      xi   ィ      xu   ゥ      xe   ェ      xo   ォ
   ka   カ      ki   キ      ku   ク      ke   ケ      ko   コ
   ga   ガ      gi   ギ      gu   グ      ge   ゲ      go   ゴ
@@ -124,17 +126,17 @@ _ROMAJI_TO_KANA_MAP = u"""  a    ア      i    イ      u    ウ      e    エ  
 KANA_TO_ROMAJI_MAP = dict((k, v.upper()) for k, v in zip(_KANA_TO_ROMAJI_MAP[0::2], _KANA_TO_ROMAJI_MAP[1::2]))
 ROMAJI_TO_KANA_MAP = dict((k, v.upper()) for k, v in zip(_ROMAJI_TO_KANA_MAP[0::2], _ROMAJI_TO_KANA_MAP[1::2]))
 
-RE_KANA_TWO = re.compile(u'(%s)' % u'|'.join(x for x in KANA_TO_ROMAJI_MAP.keys() if len(x) == 2))
-RE_KANA_ONE = re.compile(u'(%s)' % u'|'.join(x for x in KANA_TO_ROMAJI_MAP.keys() if len(x) == 1))
+RE_KANA_TWO = re.compile('(%s)' % '|'.join(x for x in KANA_TO_ROMAJI_MAP.keys() if len(x) == 2))
+RE_KANA_ONE = re.compile('(%s)' % '|'.join(x for x in KANA_TO_ROMAJI_MAP.keys() if len(x) == 1))
 
-RE_ROMAJI_THREE = re.compile(u'(%s)' % u'|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 3))
-RE_ROMAJI_TWO = re.compile(u'(%s)' % u'|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 2))
-RE_ROMAJI_ONE = re.compile(u'(%s)' % u'|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 1))
+RE_ROMAJI_THREE = re.compile('(%s)' % '|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 3))
+RE_ROMAJI_TWO = re.compile('(%s)' % '|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 2))
+RE_ROMAJI_ONE = re.compile('(%s)' % '|'.join(x for x in ROMAJI_TO_KANA_MAP.keys() if len(x) == 1))
 
-RE_VOWELS = re.compile(u'([AIUEO])ー')
+RE_VOWELS = re.compile('([AIUEO])ー')
 
 # note the absense of n and m
-RE_CONSONANTS = re.compile(u"ッ([BCDFGHJKLPQRSTVWXYZ])")
+RE_CONSONANTS = re.compile("ッ([BCDFGHJKLPQRSTVWXYZ])")
 RE_CONSONANTS_REVERSE = re.compile(r"([BCDFGHJKLPQRSTVWXYZ])\1", re.I)
 
-RE_N = re.compile(u'([ァ-ン])[mn]')
+RE_N = re.compile('([ァ-ン])[mn]')
