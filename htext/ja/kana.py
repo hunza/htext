@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import unicodedata
 import six
 
-__all__ = ['to_katakana', 'to_hiragana', 'to_han', 'to_zen', 'get_kana_group']
+__all__ = ('to_katakana', 'to_hiragana', 'to_han', 'to_zen', 'get_kana_group', 'compare', 'remove_ignorable_chars')
 
 def force_text(value):
     if isinstance(value, six.text_type):
@@ -64,6 +64,31 @@ def _get_kana_group():
         return table.get(char)
     return get_kana_group
 get_kana_group = _get_kana_group()
+
+
+def compare(first, second, ignores='・!！?？'):
+    """
+    >>> compare('アンジェラ・アキ', 'アンジェラアキ')
+    0
+    >>> compare('アイドリング!!!', 'アイドリング')
+    0
+    >>> compare('ゆず', 'ユズ')
+    0
+    """
+    first = remove_ignorable_chars(first, ignores)
+    second = remove_ignorable_chars(second, ignores)
+
+    first_katakana = to_katakana(first)
+    second_katakana = to_katakana(second)
+
+    return cmp(first_katakana, second_katakana)
+
+
+def remove_ignorable_chars(value, ignores=""" '"・!！?？=＝.、。"""):
+    for c in (ignores):
+        value = value.replace(c, '')
+    return value
+
 
 HIRAGANA_TO_KATAKANA = dict((k, v) for k, v in zip(range(ord(u"ぁ"), ord(u"ん")+1),
                                                    range(ord(u"ァ"), ord(u"ン")+1),

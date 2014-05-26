@@ -100,3 +100,16 @@ def test_row():
                             ("ポルフィーリ ペトロヴィッチ", "は"),
                             ):
         yield func, input, expected
+
+def test_compare():
+    def func(a, b, expected):
+        output = kana.compare(a, b)
+        assert output == expected, "%s expected, got %s" % (expected, output)
+
+    for a, b, expected in (
+            ('アンジェラ・アキ', 'アンジェラアキ', 0),
+            ('アイドリング!!!', 'アイドリング', 0),
+            ('ゆず', 'ユズ', 0),
+            ('あらし', 'アザラシ', 1),
+            ('あらし', 'アリクイ', -1)):
+        yield func, a, b, expected
