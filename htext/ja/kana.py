@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 import unicodedata
 import six
 
-__all__ = ['to_katakana', 'to_hiragana', 'to_han', 'to_zen', 'get_kana_row']
+__all__ = ['to_katakana', 'to_hiragana', 'to_han', 'to_zen', 'get_kana_group']
 
 def force_text(value):
     if isinstance(value, six.text_type):
@@ -39,7 +39,7 @@ def to_han(value):
     value = force_text(value)
     return value.translate(ZEN_TO_HAN_TABLE)
 
-def _get_kana_row():
+def _get_kana_group():
     _KANA_LIST = (
         (u"あ", u"ァアィイゥウェエォオヴ"),
         (u"か", u"カガキギクグケゲコゴヵヶ"),
@@ -58,12 +58,12 @@ def _get_kana_row():
         for char in chars:
             table[char] = v
 
-    def get_kana_row(value):
+    def get_kana_group(value):
         value = force_text(value)
         char = to_katakana(value[0])
         return table.get(char)
-    return get_kana_row
-get_kana_row = _get_kana_row()
+    return get_kana_group
+get_kana_group = _get_kana_group()
 
 HIRAGANA_TO_KATAKANA = dict((k, v) for k, v in zip(range(ord(u"ぁ"), ord(u"ん")+1),
                                                    range(ord(u"ァ"), ord(u"ン")+1),

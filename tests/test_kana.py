@@ -86,7 +86,7 @@ def test_mixed():
 
 def test_row():
     def func(input, expected):
-        output = kana.get_kana_row(input)
+        output = kana.get_kana_group(input)
         assert output == expected, "%s expected, got %s" % (expected, output)
 
     for input, expected in (("アリョーシャ", "あ"),
