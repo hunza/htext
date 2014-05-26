@@ -1,35 +1,36 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from htext.ja import kana
+from htext.ja import chars
 
 DATA = [
     ("コーリャ", "ｺｰﾘｬ"),
     ("ペレズヴォン", "ﾍﾟﾚｽﾞｳﾞｫﾝ"),
     ("アレクセイ・カラマーゾフ", "ｱﾚｸｾｲ･ｶﾗﾏｰｿﾞﾌ"),
     ("「スコトプリゴニエフスク」", "｢ｽｺﾄﾌﾟﾘｺﾞﾆｴﾌｽｸ｣"),
-    ("。", "｡")
+    ("。", "｡"),
+    ("Ｕ２", "U2"),
     ]
 
 def test_han_to_zen():
     def func(input, expected):
-        output = kana.to_zen(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        output = chars.to_zen(input)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
-    for i, e in DATA:
-        yield func, i, e
+    for zen, han in DATA:
+        yield func, han, zen
 
     # tests uncahnged
-    for i, e in DATA:
-        yield func, i, i
+    for zen, han in DATA:
+        yield func, zen, zen
 
 def test_zen_to_han():
     def func(input, expected):
-        output = kana.to_han(input)
-        assert output, "%r expected, got %r" % (expected, output)
+        output = chars.to_han(input)
+        assert output == expected, "%s expected, got %s" % (expected, output)
 
-    for e, i in DATA:
-        yield func, i, e
+    for zen, han in DATA:
+        yield func, zen, han
 
     # tests uncahnged
-    for i, e in DATA:
-        yield func, e, e
+    for zen, han in DATA:
+        yield func, han, han

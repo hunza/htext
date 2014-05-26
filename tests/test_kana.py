@@ -18,12 +18,6 @@ def test_invalid():
         output = kana.to_katakana(input)
         assert isinstance(output, six.text_type) and output == expected
 
-        output = kana.to_zen(input)
-        assert isinstance(output, six.text_type) and output == expected, output
-
-        output = kana.to_han(input)
-        assert isinstance(output, six.text_type) and output == expected
-
     # not unicode
     for input, expected in (
             (1, '1'),
