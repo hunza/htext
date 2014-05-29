@@ -40,9 +40,12 @@ def _get_kana_group():
             table[char] = v
 
     def get_kana_group(value):
-        value = force_text(value)
-        char = to_katakana(value[0])
-        return table.get(char)
+        if value:
+            value = force_text(value)
+            char = to_katakana(value[0])
+            return table.get(char)
+        else:
+            return None
     return get_kana_group
 get_kana_group = _get_kana_group()
 

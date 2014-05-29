@@ -78,7 +78,7 @@ def test_mixed():
     output = kana.to_katakana("からまーぞふの兄弟")
     assert output == "カラマーゾフノ兄弟"
 
-def test_row():
+def test_kana_group():
     def func(input, expected):
         output = kana.get_kana_group(input)
         assert output == expected, "%s expected, got %s" % (expected, output)
@@ -94,6 +94,20 @@ def test_row():
                             ("ポルフィーリ ペトロヴィッチ", "は"),
                             ):
         yield func, input, expected
+
+
+def test_kana_group_invalid_chars():
+    def func(input_value, expected):
+        output_value = kana.get_kana_group(input_value)
+        assert output_value == expected, "%s expected, got %s" % (expected, output)
+
+    for input_value, expected in (
+            ('酒', None),
+            ('', None),
+            (None, None),
+            (0, None)):
+        yield func, input_value, expected
+
 
 def test_compare():
     def func(a, b, expected):
