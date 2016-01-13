@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from htext.ja.romanize.hepburn import romanize, reverse
 
+
 def test_romanize():
     def func(input, expected):
         value = romanize(input)
@@ -12,6 +13,7 @@ def test_romanize():
                             ("ペレズヴォン", "PEREZUVON"),
                             ):
         yield func, input, expected
+
 
 def test_reverse():
     def func(input, expected):
@@ -24,5 +26,3 @@ def test_reverse():
                             ("shinpan", "しんぱん"),
                             ):
         yield func, input, expected
-
-
