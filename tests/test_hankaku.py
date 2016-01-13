@@ -9,7 +9,8 @@ DATA = [
     ("「スコトプリゴニエフスク」", "｢ｽｺﾄﾌﾟﾘｺﾞﾆｴﾌｽｸ｣"),
     ("。", "｡"),
     ("Ｕ２", "U2"),
-    ]
+]
+
 
 def test_han_to_zen():
     def func(input, expected):
@@ -22,6 +23,7 @@ def test_han_to_zen():
     # tests uncahnged
     for zen, han in DATA:
         yield func, zen, zen
+
 
 def test_zen_to_han():
     def func(input, expected):

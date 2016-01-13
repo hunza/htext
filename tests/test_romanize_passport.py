@@ -2,17 +2,20 @@
 from __future__ import unicode_literals
 from htext.ja.romanize.passport import romanize, reverse
 
-NAMES = [('なんば', 'NAMBA'),
-         ('ほんま', 'HOMMA'),
-         ('さんぺい', 'SAMPEI'),
-         ('はっとり', 'HATTORI'),
-         ('きっかわ', 'KIKKAWA'),
-         ('ほっち', 'HOTCHI'),
-         ('ひゅうが', 'HYUGA'),
-         ('ちゅうま', 'CHUMA'),
-         ('えっちゅう', 'ETCHU'),
-         ('チュウマ', 'CHUMA'),
-         ]
+
+NAMES = [
+    ('なんば', 'NAMBA'),
+    ('ほんま', 'HOMMA'),
+    ('さんぺい', 'SAMPEI'),
+    ('はっとり', 'HATTORI'),
+    ('きっかわ', 'KIKKAWA'),
+    ('ほっち', 'HOTCHI'),
+    ('ひゅうが', 'HYUGA'),
+    ('ちゅうま', 'CHUMA'),
+    ('えっちゅう', 'ETCHU'),
+    ('チュウマ', 'CHUMA'),
+]
+
 
 def test_hepburn():
     def func(input, expected):
@@ -26,6 +29,7 @@ def test_hepburn():
                          ]:
         yield func, i, e
 
+
 def test_hepburn_vowels():
     def func(input, expected):
         value = romanize(input, long_vowels_h=True)
@@ -38,6 +42,7 @@ def test_hepburn_vowels():
                          ]:
         yield func, i, e
 
+
 def test_reverse():
     def func(input, expected):
         try:
@@ -49,4 +54,3 @@ def test_reverse():
 
     for e, i in NAMES:
         yield func, i, e
-

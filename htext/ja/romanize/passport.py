@@ -5,6 +5,7 @@ Hepburn Romanization using Japanese passport rules
 from __future__ import unicode_literals
 from htext.ja import kana
 
+
 __all__ = ['romanize', 'reverse']
 
 _MAP = (
@@ -123,11 +124,12 @@ _MAP = (
 )
 MAP = dict((k, v) for k, v in zip(_MAP[0::2], _MAP[1::2]))
 
+
 def _hepburn_for(value, index):
     char = None
     hepburn = None
     if index + 1 < len(value):
-        char = value[index:index+2]
+        char = value[index:index + 2]
         hepburn = MAP.get(char)
 
     if hepburn is None and index < len(value):
@@ -136,13 +138,13 @@ def _hepburn_for(value, index):
 
     return char, hepburn
 
+
 def romanize(value, long_vowels_h=False):
     # convert katakana to hiragana
     value = kana.to_hiragana(value)
 
     output = []
     last_hepburn = None
-    last_char = None
 
     value_length = len(value)
     index = 0
@@ -151,7 +153,7 @@ def romanize(value, long_vowels_h=False):
         char, hepburn = _hepburn_for(value, index)
 
         if char == u"ん":
-            ## 1. 撥音 ヘボン式ではB/M/Pの前にNの代わりにMをおく
+            # 1. 撥音 ヘボン式ではB/M/Pの前にNの代わりにMをおく
             next_char, next_hepburn = _hepburn_for(value, index + 1)
             if next_hepburn is not None and next_hepburn[0] in ('BMP'):
                 hepburn = 'M'
@@ -159,7 +161,7 @@ def romanize(value, long_vowels_h=False):
                 hepburn = 'N'
 
         elif char == u"っ":
-            ## 2. 促音 子音を重ねて示す
+            # 2. 促音 子音を重ねて示す
             next_char, next_hepburn = _hepburn_for(value, index + 1)
 
             # チ(CHI), チャ(CHA), チュ(CHU), チョ(CHO)音に限り, その前にTを加える
@@ -169,12 +171,14 @@ def romanize(value, long_vowels_h=False):
                 hepburn = next_hepburn[0]
 
         elif char == u"ー":
-            ## 3. 長音 ヘボン式では長音を表記しない
+            # 3. 長音 ヘボン式では長音を表記しない
             hepburn = ""
 
-        #if 0:
-        #    ## Japanese Passport table doesn't have entries for ぁ-ぉ
-        #    pass
+        """
+        if 0:
+            # Japanese Passport table doesn't have entries for ぁ-ぉ
+            pass
+        """
 
         if hepburn is not None:
             if last_hepburn is not None:
@@ -196,10 +200,10 @@ def romanize(value, long_vowels_h=False):
             pass
 
         last_hepburn = hepburn
-        last_char = char
         index += len(char)
 
     return ''.join(output)
+
 
 def reverse(value):
     raise NotImplementedError()

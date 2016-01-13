@@ -27,36 +27,36 @@ def to_han(value):
 
 ZEN_TO_HAN_PAIRS = (
     # Fullwidth ASCII variants
-    ("！", "!"),  # FF01 => 0021 FULLWIDTH EXCLAMATION MARK
-    ("＂", "\""), # FF02 => 0022 FULLWIDTH QUOTATION MARK
-    ("＃", "#"),  # FF03 => 0023 FULLWIDTH NUMBER SIGN
-    ("＄", "$"),  # FF04 => 0024 FULLWIDTH DOLLAR SIGN
-    ("％", "%"),  # FF05 => 0025 FULLWIDTH PERCENT SIGN
-    ("＆", "&"),  # FF06 => 0026 FULLWIDTH AMPERSAND
-    ("＇", "'"),  # FF07 => 0027 FULLWIDTH APOSTROPHE
-    ("（", "("),  # FF08 => 0028 FULLWIDTH LEFT PARENTHESIS
-    ("）", ")"),  # FF09 => 0029 FULLWIDTH RIGHT PARENTHESIS
-    ("＊", "*"),  # FF0A => 002A FULLWIDTH ASTERISK
-    ("＋", "+"),  # FF0B => 002B FULLWIDTH PLUS SIGN
-    ("，", ","),  # FF0C => 002C FULLWIDTH COMMA
-    ("－", "-"),  # FF0D => 002D FULLWIDTH HYPHEN-MINUS
-    ("．", "."),  # FF0E => 002E FULLWIDTH FULL STOP
-    ("／", "/"),  # FF0F => 002F FULLWIDTH SOLIDUS
+    ("！", "!"),   # FF01 => 0021 FULLWIDTH EXCLAMATION MARK
+    ("＂", "\""),  # FF02 => 0022 FULLWIDTH QUOTATION MARK
+    ("＃", "#"),   # FF03 => 0023 FULLWIDTH NUMBER SIGN
+    ("＄", "$"),   # FF04 => 0024 FULLWIDTH DOLLAR SIGN
+    ("％", "%"),   # FF05 => 0025 FULLWIDTH PERCENT SIGN
+    ("＆", "&"),   # FF06 => 0026 FULLWIDTH AMPERSAND
+    ("＇", "'"),   # FF07 => 0027 FULLWIDTH APOSTROPHE
+    ("（", "("),   # FF08 => 0028 FULLWIDTH LEFT PARENTHESIS
+    ("）", ")"),   # FF09 => 0029 FULLWIDTH RIGHT PARENTHESIS
+    ("＊", "*"),   # FF0A => 002A FULLWIDTH ASTERISK
+    ("＋", "+"),   # FF0B => 002B FULLWIDTH PLUS SIGN
+    ("，", ","),   # FF0C => 002C FULLWIDTH COMMA
+    ("－", "-"),   # FF0D => 002D FULLWIDTH HYPHEN-MINUS
+    ("．", "."),   # FF0E => 002E FULLWIDTH FULL STOP
+    ("／", "/"),   # FF0F => 002F FULLWIDTH SOLIDUS
 
-    ("：", ":"),  # FF1A => 003A FULLWIDTH COLON
-    ("；", ";"),  # FF1B => 003B FULLWIDTH SEMICOLON
-    ("＜", "<"),  # FF1C => 003C FULLWIDTH LESS-THAN SIGN
-    ("＝", "="),  # FF1D => 003D FULLWIDTH EQUALS SIGN
-    ("＞", ">"),  # FF1E => 003E FULLWIDTH GREATER-THAN SIGN
-    ("？", "?"),  # FF1F => 003F FULLWIDTH QUESTION MARK
-    ("＠", "@"),  # FF20 => 0040 FULLWIDTH COMMERCIAL AT
+    ("：", ":"),   # FF1A => 003A FULLWIDTH COLON
+    ("；", ";"),   # FF1B => 003B FULLWIDTH SEMICOLON
+    ("＜", "<"),   # FF1C => 003C FULLWIDTH LESS-THAN SIGN
+    ("＝", "="),   # FF1D => 003D FULLWIDTH EQUALS SIGN
+    ("＞", ">"),   # FF1E => 003E FULLWIDTH GREATER-THAN SIGN
+    ("？", "?"),   # FF1F => 003F FULLWIDTH QUESTION MARK
+    ("＠", "@"),   # FF20 => 0040 FULLWIDTH COMMERCIAL AT
 
-    ("［", "["),  # FF3B => 005B FULLWIDTH LEFT SQUARE BRACKET
-    ("＼", "\\"), # FF3C => 005C FULLWIDTH REVERSE SOLIDUS
-    ("］", "]"),  # FF3D => 005D FULLWIDTH RIGHT SQUARE BRACKET
-    ("＾", "^"),  # FF3E => 005E FULLWIDTH CIRCUMFLEX ACCENT
-    ("＿", "_"),  # FF3F => 005F FULLWIDTH LOW LINE
-    ("｀", "`"),  # FF40 => 0060 FULLWIDTH GRAVE ACCENT
+    ("［", "["),   # FF3B => 005B FULLWIDTH LEFT SQUARE BRACKET
+    ("＼", "\\"),  # FF3C => 005C FULLWIDTH REVERSE SOLIDUS
+    ("］", "]"),   # FF3D => 005D FULLWIDTH RIGHT SQUARE BRACKET
+    ("＾", "^"),   # FF3E => 005E FULLWIDTH CIRCUMFLEX ACCENT
+    ("＿", "_"),   # FF3F => 005F FULLWIDTH LOW LINE
+    ("｀", "`"),   # FF40 => 0060 FULLWIDTH GRAVE ACCENT
 
     ("｛", "{"),  # FF5B => 007B FULLWIDTH LEFT CURLY BRACKET
     ("｜", "|"),  # FF5C => 007C FULLWIDTH VERTICAL LINE
@@ -152,7 +152,7 @@ ZEN_TO_HAN_PAIRS = (
     ("■", "￭"),  # 25A0 => FFED BLACK SQUARE
     ("○", "￮"),  # 25CB => FFEE WHITE CIRCLE
 
-    ## Katakana
+    # Katakana
     ('ァ', 'ｧ'),
     ('ア', 'ｱ'),
     ('ィ', 'ｨ'),

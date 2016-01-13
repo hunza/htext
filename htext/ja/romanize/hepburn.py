@@ -4,7 +4,9 @@ from __future__ import unicode_literals
 import re
 from htext.ja import kana
 
+
 __all__ = ['romanize', 'reverse']
+
 
 def romanize(value):
     value = kana.to_katakana(value)
@@ -14,13 +16,13 @@ def romanize(value):
     value = RE_KANA_TWO.sub(step1, value)
     value = RE_KANA_ONE.sub(step1, value)
 
-    ## ッta -> tta
+    # ッta -> tta
     def step2(matcher):
         char = matcher.group(1)
         return '%s%s' % (char, char)
     value = RE_CONSONANTS.sub(step2, value)
 
-    ## oー -> oo
+    # oー -> oo
     def step3(matcher):
         vowel = matcher.group(1)
         return '%s%s' % (vowel, vowel)
@@ -28,27 +30,29 @@ def romanize(value):
 
     return value
 
+
 def reverse(value):
     value = value.lower()
 
-    ## step 1; tta -> ッta
+    # step 1; tta -> ッta
     def step1(matcher):
         return "ッ%s" % matcher.group(1)
     value = RE_CONSONANTS_REVERSE.sub(step1, value)
 
-    ##
+    #
     def step2(matcher):
         return ROMAJI_TO_KANA_MAP[matcher.group(1)]
     value = RE_ROMAJI_THREE.sub(step2, value)
     value = RE_ROMAJI_TWO.sub(step2, value)
     value = RE_ROMAJI_ONE.sub(step2, value)
 
-    ## step 3
+    # step 3
     def step3(matcher):
         return '%sン' % matcher.group(1)
     value = RE_N.sub(step3, value)
 
     return kana.to_hiragana(value)
+
 
 _KANA_TO_ROMAJI_MAP = """
   ア   a       イ   i       ウ   u       エ   e       オ   o
