@@ -24,7 +24,7 @@ def basic_latin_to_fullwidth(value):
     コードポイントに差分の0xFEE0を足す
     """
     _value = value.replace(' ', '\u3000')
-    return BASIC_LATIN_RE.sub(lambda x: unichr(ord(x.group(0)) + 0xFEE0), _value)
+    return BASIC_LATIN_RE.sub(lambda x: six.unichr(ord(x.group(0)) + 0xFEE0), _value)
 
 
 def aggregate_whitespace(value):
