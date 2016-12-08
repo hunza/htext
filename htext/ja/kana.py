@@ -130,8 +130,7 @@ def compare(first, second, ignores='・!！?？'):
     first_katakana = to_katakana(first)
     second_katakana = to_katakana(second)
 
-    cmp = lambda x, y: (x > y) - (x < y)  # noqa: E731
-    return cmp(first_katakana, second_katakana)
+    return (first_katakana > second_katakana) - (first_katakana < second_katakana)
 
 
 def remove_ignorable_chars(value, ignores=""" '"・!！?？=＝.、。"""):
